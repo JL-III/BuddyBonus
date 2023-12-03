@@ -19,7 +19,7 @@ public class BuddyRequestEvent extends Event {
     private final UUID player_initiate;
     private final UUID player_target;
 
-    public BuddyRequestEvent(UUID player_initiate, UUID player_target) {
+    public BuddyRequestEvent(@NotNull UUID player_initiate, @NotNull UUID player_target) {
         this.player_initiate = player_initiate;
         this.player_target = player_target;
     }

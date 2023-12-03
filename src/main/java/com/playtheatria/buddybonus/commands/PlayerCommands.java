@@ -4,12 +4,15 @@ import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
+import com.playtheatria.buddybonus.utils.BuddyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public class PlayerCommands implements CommandExecutor {
     // player sends request to player for buddy system
@@ -32,26 +35,21 @@ public class PlayerCommands implements CommandExecutor {
         // check if they have a pending request?
         if (commandSender instanceof Player player) {
             // handles /buddy remove, /buddy <name>, /buddy accept
-            if (args.length == 2) {
-                if (args[1].equalsIgnoreCase("remove")) {
-                    //gross
-                    Buddy buddy = null;
-                    for (Buddy buddy_in_list: plugin.getBuddyList()) {
-                        if (buddy_in_list.player_one_UUID() == player.getUniqueId()) { buddy = buddy_in_list; }
-                        if (buddy_in_list.player_two_UUID() == player.getUniqueId()) { buddy = buddy_in_list; }
-                    }
-                    if (buddy == null) {
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("remove")) {
+                    Optional<Buddy> buddyOptional = BuddyUtils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
+                    if (buddyOptional.isEmpty()) {
                         Bukkit.getConsoleSender().sendMessage("No buddy found for player: " + player.getName());
-                        return true;
                     } else {
-                        Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddy));
+                        Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddyOptional.get()));
                     }
-                } else if (args[1].equalsIgnoreCase("accept")) {
-
+                    return true;
+                } else if (args[0].equalsIgnoreCase("accept")) {
+                    return true;
                 } else {
                     // check to see if target exists and is not the player themselves
-                    if (Bukkit.getPlayer(args[1]) != null && Bukkit.getPlayer(args[1]) != player) {
-                        Player target = Bukkit.getPlayer(args[1]);
+                    if (Bukkit.getPlayer(args[0]) != null && Bukkit.getPlayer(args[0]) != player) {
+                        Player target = Bukkit.getPlayer(args[0]);
 
                         assert target != null;
                         for (Buddy buddy: plugin.getBuddyList()) {
@@ -60,6 +58,7 @@ public class PlayerCommands implements CommandExecutor {
                             if (buddy.player_two_UUID() == player.getUniqueId()) { plugin.getBuddyList().remove(buddy); }
                         }
                         Bukkit.getPluginManager().callEvent(new BuddyRequestEvent(player.getUniqueId(), target.getUniqueId()));
+                        return true;
                     }
                 }
             }
