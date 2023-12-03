@@ -45,18 +45,13 @@ public class PlayerCommands implements CommandExecutor {
                     }
                     return true;
                 } else if (args[0].equalsIgnoreCase("accept")) {
+
                     return true;
                 } else {
                     // check to see if target exists and is not the player themselves
                     if (Bukkit.getPlayer(args[0]) != null && Bukkit.getPlayer(args[0]) != player) {
                         Player target = Bukkit.getPlayer(args[0]);
-
                         assert target != null;
-                        for (Buddy buddy: plugin.getBuddyList()) {
-                            // here we check if the player is a buddy already, if they are then we remove the buddy from the list so that they can buddy up with someone else.
-                            if (buddy.player_one_UUID() == player.getUniqueId()) { plugin.getBuddyList().remove(buddy); }
-                            if (buddy.player_two_UUID() == player.getUniqueId()) { plugin.getBuddyList().remove(buddy); }
-                        }
                         Bukkit.getPluginManager().callEvent(new BuddyRequestEvent(player.getUniqueId(), target.getUniqueId()));
                         return true;
                     }
