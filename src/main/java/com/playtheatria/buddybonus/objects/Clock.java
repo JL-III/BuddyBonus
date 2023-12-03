@@ -1,7 +1,6 @@
 package com.playtheatria.buddybonus.objects;
 
 import com.playtheatria.buddybonus.events.CheckEvent;
-import com.playtheatria.buddybonus.objects.Buddy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;

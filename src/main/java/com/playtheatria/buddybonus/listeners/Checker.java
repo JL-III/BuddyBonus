@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.earth2me.essentials.Essentials;
+import com.playtheatria.buddybonus.events.NotifyEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.events.CheckEvent;
 import org.bukkit.Bukkit;
@@ -19,7 +20,8 @@ public class Checker implements Listener {
     @EventHandler
     public void onCheckEvent(CheckEvent event) {
         if (isQualified(event.getBuddy())) {
-            Bukkit.getConsoleSender().sendMessage("Buddy is qualified!");
+            NotifyEvent notifyEvent = new NotifyEvent(event.getBuddy());
+            Bukkit.getPluginManager().callEvent(notifyEvent);
         }
     }
     public boolean isQualified(Buddy buddy) {

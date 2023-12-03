@@ -1,7 +1,9 @@
 package com.playtheatria.buddybonus;
 
 import com.earth2me.essentials.Essentials;
+import com.playtheatria.buddybonus.events.NotifyEvent;
 import com.playtheatria.buddybonus.listeners.Checker;
+import com.playtheatria.buddybonus.listeners.Notify;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Clock;
 import org.bukkit.Bukkit;
@@ -21,6 +23,7 @@ public final class BuddyBonus extends JavaPlugin {
         Clock clock = new Clock(this, buddyList);
         clock.run();
         Bukkit.getPluginManager().registerEvents(checker, this);
+        Bukkit.getPluginManager().registerEvents(new Notify(), this);
     }
 
 }
