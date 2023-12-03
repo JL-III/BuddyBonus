@@ -1,0 +1,4 @@
+name: BuddyBonus
+version: '${project.version}'
+main: com.playtheatria.buddybonus.BuddyBonus
+api-version: '1.20'
