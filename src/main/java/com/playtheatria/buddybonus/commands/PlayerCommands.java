@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.commands;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import org.bukkit.Bukkit;
@@ -33,7 +34,18 @@ public class PlayerCommands implements CommandExecutor {
             // handles /buddy remove, /buddy <name>, /buddy accept
             if (args.length == 2) {
                 if (args[1].equalsIgnoreCase("remove")) {
-
+                    //gross
+                    Buddy buddy = null;
+                    for (Buddy buddy_in_list: plugin.getBuddyList()) {
+                        if (buddy_in_list.player_one_UUID() == player.getUniqueId()) { buddy = buddy_in_list; }
+                        if (buddy_in_list.player_two_UUID() == player.getUniqueId()) { buddy = buddy_in_list; }
+                    }
+                    if (buddy == null) {
+                        Bukkit.getConsoleSender().sendMessage("No buddy found for player: " + player.getName());
+                        return true;
+                    } else {
+                        Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddy));
+                    }
                 } else if (args[1].equalsIgnoreCase("accept")) {
 
                 } else {
