@@ -1,5 +1,6 @@
-package com.playtheatria.buddybonus;
+package com.playtheatria.buddybonus.events;
 
+import com.playtheatria.buddybonus.objects.Buddy;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;

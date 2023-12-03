@@ -1,4 +1,4 @@
-package com.playtheatria.buddybonus;
+package com.playtheatria.buddybonus.objects;
 
 import java.util.UUID;
 

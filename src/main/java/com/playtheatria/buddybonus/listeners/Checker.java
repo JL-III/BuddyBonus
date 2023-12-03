@@ -1,6 +1,8 @@
-package com.playtheatria.buddybonus;
+package com.playtheatria.buddybonus.listeners;
 
 import com.earth2me.essentials.Essentials;
+import com.playtheatria.buddybonus.objects.Buddy;
+import com.playtheatria.buddybonus.events.CheckEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

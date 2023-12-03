@@ -1,6 +1,9 @@
 package com.playtheatria.buddybonus;
 
 import com.earth2me.essentials.Essentials;
+import com.playtheatria.buddybonus.listeners.Checker;
+import com.playtheatria.buddybonus.objects.Buddy;
+import com.playtheatria.buddybonus.objects.Clock;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
