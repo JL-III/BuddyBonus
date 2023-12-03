@@ -3,3 +3,10 @@ version: '${project.version}'
 main: com.playtheatria.buddybonus.BuddyBonus
 api-version: '1.20'
 depend: [Essentials]
+commands:
+  buddy:
+    description: for the buddies system
+    usage: |
+      <command> <name>
+      <command> remove
+      <command> accept
