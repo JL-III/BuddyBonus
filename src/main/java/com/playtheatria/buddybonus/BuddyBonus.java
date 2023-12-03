@@ -27,7 +27,7 @@ public final class BuddyBonus extends JavaPlugin {
         buddyClock.run();
         Bukkit.getPluginManager().registerEvents(rewardValidation, this);
         Bukkit.getPluginManager().registerEvents(new Notify(), this);
-        Bukkit.getPluginManager().registerEvents(new BuddyRequest(), this);
+        Bukkit.getPluginManager().registerEvents(new BuddyRequest(this), this);
         Bukkit.getPluginManager().registerEvents(new BuddyRemove(), this);
         Objects.requireNonNull(getCommand("buddy")).setExecutor(new PlayerCommands(this));
     }
