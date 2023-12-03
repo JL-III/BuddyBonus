@@ -1,11 +1,10 @@
 package com.playtheatria.buddybonus;
 
 import com.earth2me.essentials.Essentials;
-import com.playtheatria.buddybonus.events.NotifyEvent;
-import com.playtheatria.buddybonus.listeners.Checker;
+import com.playtheatria.buddybonus.listeners.RewardValidation;
 import com.playtheatria.buddybonus.listeners.Notify;
 import com.playtheatria.buddybonus.objects.Buddy;
-import com.playtheatria.buddybonus.objects.Clock;
+import com.playtheatria.buddybonus.objects.BuddyClock;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,14 +15,18 @@ public final class BuddyBonus extends JavaPlugin {
 
     private final List<Buddy> buddyList = new ArrayList<>();
     private final Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
-    private final Checker checker = new Checker(essentials);
+    private final RewardValidation rewardValidation = new RewardValidation(essentials);
 
     @Override
     public void onEnable() {
-        Clock clock = new Clock(this, buddyList);
-        clock.run();
-        Bukkit.getPluginManager().registerEvents(checker, this);
+        BuddyClock buddyClock = new BuddyClock(this, buddyList);
+        buddyClock.run();
+        Bukkit.getPluginManager().registerEvents(rewardValidation, this);
         Bukkit.getPluginManager().registerEvents(new Notify(), this);
+    }
+
+    public List<Buddy> getBuddyList() {
+        return buddyList;
     }
 
 }

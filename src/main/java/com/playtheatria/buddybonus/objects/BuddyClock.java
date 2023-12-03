@@ -7,10 +7,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class Clock {
+public class BuddyClock {
     private final Plugin plugin;
     private final List<Buddy> buddyList;
-    public Clock(Plugin plugin, List<Buddy> buddyList) {
+    public BuddyClock(Plugin plugin, List<Buddy> buddyList) {
         this.plugin = plugin;
         this.buddyList = buddyList;
     }

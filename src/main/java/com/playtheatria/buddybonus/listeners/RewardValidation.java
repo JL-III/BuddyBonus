@@ -1,7 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.earth2me.essentials.Essentials;
-import com.playtheatria.buddybonus.events.NotifyEvent;
+import com.playtheatria.buddybonus.events.RewardEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.events.CheckEvent;
 import org.bukkit.Bukkit;
@@ -11,17 +11,17 @@ import org.bukkit.event.Listener;
 
 import java.util.UUID;
 
-public class Checker implements Listener {
+public class RewardValidation implements Listener {
     private final Essentials essentials;
-    public Checker(Essentials essentials) {
+    public RewardValidation(Essentials essentials) {
         this.essentials = essentials;
     }
 
     @EventHandler
     public void onCheckEvent(CheckEvent event) {
         if (isQualified(event.getBuddy())) {
-            NotifyEvent notifyEvent = new NotifyEvent(event.getBuddy());
-            Bukkit.getPluginManager().callEvent(notifyEvent);
+            RewardEvent rewardEvent = new RewardEvent(event.getBuddy(), 500);
+            Bukkit.getPluginManager().callEvent(rewardEvent);
         }
     }
     public boolean isQualified(Buddy buddy) {
