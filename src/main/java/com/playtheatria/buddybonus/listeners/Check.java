@@ -12,9 +12,9 @@ import org.bukkit.event.Listener;
 import java.util.UUID;
 
 // this seems like a weird name for the class at this point
-public class RewardValidation implements Listener {
+public class Check implements Listener {
     private final Essentials essentials;
-    public RewardValidation(Essentials essentials) {
+    public Check(Essentials essentials) {
         this.essentials = essentials;
     }
 
@@ -23,6 +23,8 @@ public class RewardValidation implements Listener {
         if (isQualified(event.getBuddy())) {
             RewardEvent rewardEvent = new RewardEvent(event.getBuddy(), 500);
             Bukkit.getPluginManager().callEvent(rewardEvent);
+        } else {
+            Bukkit.getConsoleSender().sendMessage("buddy doesn't qualify");
         }
     }
     public boolean isQualified(Buddy buddy) {
@@ -36,7 +38,7 @@ public class RewardValidation implements Listener {
         assert player_two != null;
         if (!playersAreWithinDistance(player_one, player_two)) return  false;
         if (!playersAreBothActive(buddy.player_one_UUID(), buddy.player_two_UUID())) return false;
-        return false;
+        return true;
     }
 
     public boolean playersAreWithinDistance(Player player_one, Player player_two) {
