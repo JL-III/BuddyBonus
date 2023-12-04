@@ -8,6 +8,6 @@ import org.bukkit.event.Listener;
 public class Notify implements Listener {
     @EventHandler
     public void onRewardEvent(RewardEvent event) {
-        Bukkit.getConsoleSender().sendMessage("received reward event!");
+        Bukkit.getConsoleSender().sendMessage("notify: received reward event!");
     }
 }
