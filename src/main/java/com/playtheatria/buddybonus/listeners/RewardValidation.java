@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 
 import java.util.UUID;
 
+// this seems like a weird name for the class at this point
 public class RewardValidation implements Listener {
     private final Essentials essentials;
     public RewardValidation(Essentials essentials) {
@@ -39,17 +40,27 @@ public class RewardValidation implements Listener {
     }
 
     public boolean playersAreWithinDistance(Player player_one, Player player_two) {
-        if (player_one.getWorld() != player_two.getWorld()) return false;
+        if (player_one.getWorld() != player_two.getWorld()) {
+            Bukkit.getConsoleSender().sendMessage("players are not in the same world");
+            return false;
+        }
         if (player_one.getLocation().getBlockX() - player_two.getLocation().getBlockX() > 100
         || player_one.getLocation().getBlockZ() - player_two.getLocation().getBlockZ() > 100) {
+            Bukkit.getConsoleSender().sendMessage("players are not close enough");
             return false;
         }
         return true;
     }
 
     public boolean playersAreBothActive(UUID player_one, UUID player_two) {
-        if (essentials.getUser(player_one) != null && essentials.getUser(player_one).isAfk()) return false;
-        if (essentials.getUser(player_two) != null && essentials.getUser(player_two).isAfk()) return false;
+        if (essentials.getUser(player_one) != null && essentials.getUser(player_one).isAfk()) {
+            Bukkit.getConsoleSender().sendMessage("player one is either null or afk");
+            return false;
+        }
+        if (essentials.getUser(player_two) != null && essentials.getUser(player_two).isAfk()) {
+            Bukkit.getConsoleSender().sendMessage("player two is either null or afk");
+            return false;
+        }
         return true;
     }
 

@@ -25,6 +25,6 @@ public class BuddyClock {
                     Bukkit.getPluginManager().callEvent(event);
                 }
             }
-        }.runTaskTimer(plugin, 0, 20 * 60);
+        }.runTaskTimer(plugin, 0, 20 * 15);
     }
 }
