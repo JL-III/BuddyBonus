@@ -1,0 +1,12 @@
+version: 0.0.1
+
+reward:
+  amount: 100
+
+# duration in seconds
+reward-timer:
+  duration: 60
+
+# lifespan of a buddy request in seconds
+request:
+  lifespan: 15

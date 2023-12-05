@@ -1,5 +1,6 @@
 package com.playtheatria.buddybonus.objects;
 
+import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.RewardCheckEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -8,9 +9,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 
 public class BuddyClock {
-    private final Plugin plugin;
+    private final BuddyBonus plugin;
     private final List<Buddy> buddyList;
-    public BuddyClock(Plugin plugin, List<Buddy> buddyList) {
+    public BuddyClock(BuddyBonus plugin, List<Buddy> buddyList) {
         this.plugin = plugin;
         this.buddyList = buddyList;
     }
@@ -25,6 +26,6 @@ public class BuddyClock {
                     Bukkit.getPluginManager().callEvent(event);
                 }
             }
-        }.runTaskTimer(plugin, 0, 20 * 15);
+        }.runTaskTimer(plugin, 0, 20 * plugin.getConfigManager().getRewardTimerDuration());
     }
 }

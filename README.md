@@ -4,7 +4,7 @@ Players that play together earn bonus money together.
 
 Todo:
 - disperse reward
-- add config for timing and reward amounts
+~~- add config for timing and reward amounts~~
 - add player options for notification
 - add bonus modifiers over time
 - add `/buddy` command so players can see who their buddy is

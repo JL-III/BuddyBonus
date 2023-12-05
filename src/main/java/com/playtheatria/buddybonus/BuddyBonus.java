@@ -3,13 +3,12 @@ package com.playtheatria.buddybonus;
 import com.earth2me.essentials.Essentials;
 import com.playtheatria.buddybonus.commands.AdminCommands;
 import com.playtheatria.buddybonus.commands.PlayerCommands;
+import com.playtheatria.buddybonus.config.ConfigManager;
 import com.playtheatria.buddybonus.listeners.*;
-import com.playtheatria.buddybonus.objects.Buddy;
-import com.playtheatria.buddybonus.objects.BuddyClock;
-import com.playtheatria.buddybonus.objects.Request;
-import com.playtheatria.buddybonus.objects.RequestClock;
+import com.playtheatria.buddybonus.objects.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +19,7 @@ public final class BuddyBonus extends JavaPlugin {
     private List<Buddy> buddyList = new CopyOnWriteArrayList<>();
     private List<Request> requestList = new CopyOnWriteArrayList<>();
     private final Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
+    private final ConfigManager configManager = new ConfigManager(this);
 
     @Override
     public void onEnable() {
@@ -27,6 +27,8 @@ public final class BuddyBonus extends JavaPlugin {
             Bukkit.getConsoleSender().sendMessage("BuddyBonus: essentials was not found, shutting down.");
             Bukkit.getPluginManager().disablePlugin(this);
         }
+        saveDefaultConfig();
+        validateConfig();
         Bukkit.getPluginManager().registerEvents(new BuddyCreate(this), this);
         Bukkit.getPluginManager().registerEvents(new BuddyRemove(this), this);
         Bukkit.getPluginManager().registerEvents(new BuddyRequest(this), this);
@@ -48,5 +50,19 @@ public final class BuddyBonus extends JavaPlugin {
     }
 
     public List<Request> getRequestList() { return requestList; }
+
+    public void validateConfig() {
+        ConfigValidationResult configValidationResult = configManager.isConfigValid();
+        if (!configValidationResult.getIsValid()) {
+            Bukkit.getConsoleSender().sendMessage(configValidationResult.getMessage());
+            Bukkit.getPluginManager().disablePlugin(this);
+        } else {
+            Bukkit.getConsoleSender().sendMessage(configValidationResult.getMessage());
+        }
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
 
 }
