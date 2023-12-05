@@ -3,8 +3,6 @@ package com.playtheatria.buddybonus.config;
 import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.objects.ConfigValidationResult;
 
-import java.util.HashMap;
-
 public class ConfigManager {
 
     private final String REWARD_TIMER_DURATION = "reward-timer.duration";

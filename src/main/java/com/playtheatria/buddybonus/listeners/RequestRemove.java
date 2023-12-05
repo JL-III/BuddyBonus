@@ -5,8 +5,6 @@ import com.playtheatria.buddybonus.events.RequestRemoveEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.List;
-
 public class RequestRemove implements Listener {
 
     private final BuddyBonus plugin;

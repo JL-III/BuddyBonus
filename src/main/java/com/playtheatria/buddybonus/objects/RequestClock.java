@@ -3,7 +3,6 @@ package com.playtheatria.buddybonus.objects;
 import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.RequestRemoveEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
