@@ -7,6 +7,11 @@ commands:
   buddy:
     description: for the buddies system
     usage: |
-      <command> <name>
-      <command> remove
-      <command> accept
+      /<command> <name>
+      /<command> remove
+      /<command> accept
+  abuddy:
+    description: admin commands
+    usage: |
+      /<command> requests
+      /<command> buddies

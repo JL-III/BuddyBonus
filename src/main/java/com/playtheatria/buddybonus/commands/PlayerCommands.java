@@ -3,8 +3,10 @@ package com.playtheatria.buddybonus.commands;
 import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
+import com.playtheatria.buddybonus.events.RequestAcceptEvent;
+import com.playtheatria.buddybonus.events.RequestRemoveEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
-import com.playtheatria.buddybonus.utils.BuddyUtils;
+import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,31 +28,25 @@ public class PlayerCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        // check if target player exists
-        // check if they belong to a buddy - maybe this isn't needed?
-        // its possible we just let them always request a new buddy and if
-        // someone accepts it changes their buddy to the new person
-        // not caring if they were already in a buddy?
-        // maybe when a player sends a request they can be removed from any previous buddy they belonged to
-        // check if they have a pending request?
         if (commandSender instanceof Player player) {
             // handles /buddy remove, /buddy <name>, /buddy accept
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("remove")) {
-                    Optional<Buddy> buddyOptional = BuddyUtils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
+                    Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
                     if (buddyOptional.isEmpty()) {
-                        Bukkit.getConsoleSender().sendMessage("No buddy found for player: " + player.getName());
+                        Bukkit.getConsoleSender().sendMessage("no buddy found for player: " + player.getName());
                     } else {
                         Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddyOptional.get()));
                     }
                     return true;
                 } else if (args[0].equalsIgnoreCase("accept")) {
-
+                    Bukkit.getPluginManager().callEvent(new RequestAcceptEvent(player.getUniqueId()));
                     return true;
                 } else {
                     // check to see if target exists and is not the player themselves
                     if (Bukkit.getPlayer(args[0]) != null && Bukkit.getPlayer(args[0]) != player) {
                         Player target = Bukkit.getPlayer(args[0]);
+
                         assert target != null;
                         Bukkit.getPluginManager().callEvent(new BuddyRequestEvent(player.getUniqueId(), target.getUniqueId()));
                         return true;

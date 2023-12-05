@@ -1,5 +1,6 @@
 package com.playtheatria.buddybonus.objects;
 
-public class Request {
-    // used to store a pending request
-}
+import java.util.Date;
+import java.util.UUID;
+
+public record Request(UUID player_one_UUID, UUID player_two_UUID, long time_stamp) { }

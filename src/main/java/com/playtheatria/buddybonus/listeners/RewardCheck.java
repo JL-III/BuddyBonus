@@ -3,7 +3,7 @@ package com.playtheatria.buddybonus.listeners;
 import com.earth2me.essentials.Essentials;
 import com.playtheatria.buddybonus.events.RewardEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
-import com.playtheatria.buddybonus.events.CheckEvent;
+import com.playtheatria.buddybonus.events.RewardCheckEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,14 +12,14 @@ import org.bukkit.event.Listener;
 import java.util.UUID;
 
 // this seems like a weird name for the class at this point
-public class Check implements Listener {
+public class RewardCheck implements Listener {
     private final Essentials essentials;
-    public Check(Essentials essentials) {
+    public RewardCheck(Essentials essentials) {
         this.essentials = essentials;
     }
 
     @EventHandler
-    public void onCheckEvent(CheckEvent event) {
+    public void onRewardCheck(RewardCheckEvent event) {
         if (isQualified(event.getBuddy())) {
             RewardEvent rewardEvent = new RewardEvent(event.getBuddy(), 500);
             Bukkit.getPluginManager().callEvent(rewardEvent);

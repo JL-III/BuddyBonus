@@ -1,11 +1,12 @@
 package com.playtheatria.buddybonus.events;
 
-import com.playtheatria.buddybonus.objects.Buddy;
+import com.playtheatria.buddybonus.objects.Request;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class CheckEvent extends Event {
+public class RequestRemoveEvent extends Event {
+
     private static final HandlerList HANDLERS = new HandlerList();
     public static HandlerList getHandlerList() {
         return HANDLERS;
@@ -15,12 +16,12 @@ public class CheckEvent extends Event {
         return HANDLERS;
     }
 
-    private final Buddy buddy;
+    private final Request request;
 
-    public CheckEvent(Buddy buddy) {
-        this.buddy = buddy;
+    public RequestRemoveEvent(Request request) {
+        this.request = request;
     }
-    public Buddy getBuddy() {
-        return buddy;
-    }
+
+    public Request getRequest() { return request; }
+
 }
