@@ -4,7 +4,6 @@ import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.BuddyCreateEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

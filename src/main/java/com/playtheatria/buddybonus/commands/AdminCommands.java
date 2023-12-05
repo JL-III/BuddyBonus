@@ -1,22 +1,15 @@
 package com.playtheatria.buddybonus.commands;
 
 import com.playtheatria.buddybonus.BuddyBonus;
-import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
-import com.playtheatria.buddybonus.events.BuddyRequestEvent;
-import com.playtheatria.buddybonus.events.RequestAcceptEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Request;
-import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 
 public class AdminCommands implements CommandExecutor {
 

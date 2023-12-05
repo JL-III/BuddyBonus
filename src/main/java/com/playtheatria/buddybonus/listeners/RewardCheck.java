@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 
 import java.util.UUID;
 
-// this seems like a weird name for the class at this point
 public class RewardCheck implements Listener {
     private final Essentials essentials;
     public RewardCheck(Essentials essentials) {

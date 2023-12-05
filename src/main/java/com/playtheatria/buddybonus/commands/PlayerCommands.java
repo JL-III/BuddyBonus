@@ -4,7 +4,6 @@ import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
 import com.playtheatria.buddybonus.events.RequestAcceptEvent;
-import com.playtheatria.buddybonus.events.RequestRemoveEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
@@ -17,10 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
 public class PlayerCommands implements CommandExecutor {
-    // player sends request to player for buddy system
-    // check if player already has a buddy
-    // player can remove buddy with /buddy remove
-    // player can add buddy with /buddy <name>
     private final BuddyBonus plugin;
     public PlayerCommands(BuddyBonus plugin) {
         this.plugin = plugin;
