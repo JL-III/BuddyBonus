@@ -16,7 +16,7 @@ public class BuddyRemove implements Listener {
 
     @EventHandler
     public void onBuddyRemove(BuddyRemoveEvent event) {
-        Bukkit.getConsoleSender().sendMessage("received remove buddy event!");
+        plugin.debug("received remove buddy event!");
         plugin.getBuddyList().remove(event.getBuddy());
     }
 }

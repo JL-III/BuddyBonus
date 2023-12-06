@@ -53,7 +53,7 @@ public class BuddyRequest implements Listener {
                     ChatColor.GREEN + initiate.getName() + ChatColor.GOLD + " has sent you a buddy request! Use "
                     + ChatColor.GREEN + "/buddy accept" + ChatColor.GOLD + " within " + ChatColor.YELLOW + "5"
                             + ChatColor.GOLD + " seconds to accept!");
-            Bukkit.getConsoleSender().sendMessage("created a new request for " + initiate.getName() + " and " + target.getName());
+            plugin.debug("created a new request for " + initiate.getName() + " and " + target.getName());
         }
     }
 }

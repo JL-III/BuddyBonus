@@ -28,12 +28,12 @@ public class PlayerQuit implements Listener {
 
         if (optionalBuddy.isPresent()) {
             Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(optionalBuddy.get()));
-            Bukkit.getConsoleSender().sendMessage("BuddyBonus: removed buddy containing " + event.getPlayer().getName() +  " for logging out.");
+            plugin.debug("BuddyBonus: removed buddy containing " + event.getPlayer().getName() + " for logging out.");
         }
 
         if (optionalRequest.isPresent()) {
             Bukkit.getPluginManager().callEvent(new RequestRemoveEvent(optionalRequest.get()));
-            Bukkit.getConsoleSender().sendMessage("BuddyBonus: removed request containing " + event.getPlayer().getName() +  " for logging out.");
+            plugin.debug("BuddyBonus: removed request containing " + event.getPlayer().getName() + " for logging out.");
         }
     }
 

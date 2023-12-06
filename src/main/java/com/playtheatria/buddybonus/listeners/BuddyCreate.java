@@ -27,9 +27,7 @@ public class BuddyCreate implements Listener {
             player_two.sendMessage("You are now buddies with " + player_one.getName());
             plugin.getBuddyList().add(buddy);
         } else {
-            Bukkit.getConsoleSender().sendMessage("Something went wrong with buddy creation, let your loving owner know.");
+            plugin.debug("Something went wrong with buddy creation, let your loving owner know.");
         }
-
-
     }
 }

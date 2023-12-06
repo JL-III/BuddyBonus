@@ -45,7 +45,7 @@ public class PlayerCommands implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("remove")) {
                     Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
                     if (buddyOptional.isEmpty()) {
-                        Bukkit.getConsoleSender().sendMessage("no buddy found for player: " + player.getName());
+                        plugin.debug("no buddy found for player: " + player.getName());
                     } else {
                         Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddyOptional.get()));
                     }

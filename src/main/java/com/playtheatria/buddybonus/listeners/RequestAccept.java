@@ -21,14 +21,12 @@ public class RequestAccept implements Listener {
 
     @EventHandler
     public void onRequestAccept(RequestAcceptEvent event) {
-        Bukkit.getConsoleSender().sendMessage("received a request accept event!");
         Optional<Request> optionalRequest = Utils.getOptionalRequestFromRequestList(plugin.getRequestList(), event.getPlayer_uuid());
         if (optionalRequest.isPresent()) {
             Bukkit.getPluginManager().callEvent(new BuddyCreateEvent(optionalRequest.get()));
-            Bukkit.getConsoleSender().sendMessage("firing buddy create event");
+            plugin.debug("firing buddy create event");
             Bukkit.getPluginManager().callEvent(new RequestRemoveEvent(optionalRequest.get()));
-            Bukkit.getConsoleSender().sendMessage("removing request since it was accepted");
-
+            plugin.debug("removing request since it was accepted");
         }
     }
 }

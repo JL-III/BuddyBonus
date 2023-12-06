@@ -20,7 +20,7 @@ public class BuddyClock {
             @Override
             public void run() {
                 for (Buddy buddy: buddyList) {
-                    Bukkit.getConsoleSender().sendMessage("sending check event!");
+                    plugin.debug("sending check event!");
                     RewardCheckEvent event = new RewardCheckEvent(buddy);
                     Bukkit.getPluginManager().callEvent(event);
                 }

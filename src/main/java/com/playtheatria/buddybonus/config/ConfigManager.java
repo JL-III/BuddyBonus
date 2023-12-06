@@ -8,6 +8,7 @@ public class ConfigManager {
     private final String REWARD_TIMER_DURATION = "reward-timer.duration";
     private final String REWARD_AMOUNT = "reward.amount";
     private final String REQUEST_LIFESPAN = "request.lifespan";
+    private final String DEBUG = "debug";
 
     private BuddyBonus plugin;
 
@@ -26,6 +27,8 @@ public class ConfigManager {
     public int getRewardTimerDuration() { return plugin.getConfig().getInt(REWARD_TIMER_DURATION); }
 
     public int getRequestLifespan() { return plugin.getConfig().getInt(REQUEST_LIFESPAN); }
+
+    public boolean getDebug() { return plugin.getConfig().getBoolean(DEBUG); }
 
 
     public ConfigValidationResult isConfigValid() {

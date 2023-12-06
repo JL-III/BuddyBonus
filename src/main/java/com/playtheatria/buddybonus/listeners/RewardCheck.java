@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.earth2me.essentials.Essentials;
+import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.RewardEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.events.RewardCheckEvent;
@@ -12,18 +13,20 @@ import org.bukkit.event.Listener;
 import java.util.UUID;
 
 public class RewardCheck implements Listener {
+    private BuddyBonus plugin;
     private final Essentials essentials;
-    public RewardCheck(Essentials essentials) {
+    public RewardCheck(BuddyBonus plugin, Essentials essentials) {
+        this.plugin = plugin;
         this.essentials = essentials;
     }
 
     @EventHandler
     public void onRewardCheck(RewardCheckEvent event) {
         if (isQualified(event.getBuddy())) {
-            RewardEvent rewardEvent = new RewardEvent(event.getBuddy(), 500);
+            RewardEvent rewardEvent = new RewardEvent(event.getBuddy(), plugin.getConfigManager().getReward_amount());
             Bukkit.getPluginManager().callEvent(rewardEvent);
         } else {
-            Bukkit.getConsoleSender().sendMessage("buddy doesn't qualify");
+            plugin.debug("buddy doesn't qualify");
         }
     }
     public boolean isQualified(Buddy buddy) {
@@ -42,12 +45,12 @@ public class RewardCheck implements Listener {
 
     public boolean playersAreWithinDistance(Player player_one, Player player_two) {
         if (player_one.getWorld() != player_two.getWorld()) {
-            Bukkit.getConsoleSender().sendMessage("players are not in the same world");
+            plugin.debug("players are not in the same world");
             return false;
         }
         if (player_one.getLocation().getBlockX() - player_two.getLocation().getBlockX() > 100
         || player_one.getLocation().getBlockZ() - player_two.getLocation().getBlockZ() > 100) {
-            Bukkit.getConsoleSender().sendMessage("players are not close enough");
+            plugin.debug("players are not close enough");
             return false;
         }
         return true;
@@ -55,11 +58,11 @@ public class RewardCheck implements Listener {
 
     public boolean playersAreBothActive(UUID player_one, UUID player_two) {
         if (essentials.getUser(player_one) != null && essentials.getUser(player_one).isAfk()) {
-            Bukkit.getConsoleSender().sendMessage("player one is either null or afk");
+            plugin.debug("player one is either null or afk");
             return false;
         }
         if (essentials.getUser(player_two) != null && essentials.getUser(player_two).isAfk()) {
-            Bukkit.getConsoleSender().sendMessage("player two is either null or afk");
+            plugin.debug("player two is either null or afk");
             return false;
         }
         return true;

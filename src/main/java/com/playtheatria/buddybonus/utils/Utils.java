@@ -2,6 +2,7 @@ package com.playtheatria.buddybonus.utils;
 
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Request;
+import org.bukkit.Bukkit;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,4 +26,5 @@ public class Utils {
         }
         return request;
     }
+
 }

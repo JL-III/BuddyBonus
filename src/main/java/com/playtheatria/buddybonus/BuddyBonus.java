@@ -34,8 +34,8 @@ public final class BuddyBonus extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerQuit(this), this);
         Bukkit.getPluginManager().registerEvents(new RequestAccept(this), this);
         Bukkit.getPluginManager().registerEvents(new RequestRemove(this), this);
-        Bukkit.getPluginManager().registerEvents(new Reward(), this);
-        Bukkit.getPluginManager().registerEvents(new RewardCheck(essentials), this);
+        Bukkit.getPluginManager().registerEvents(new Reward(this), this);
+        Bukkit.getPluginManager().registerEvents(new RewardCheck(this, essentials), this);
 
         Objects.requireNonNull(getCommand("buddy")).setExecutor(new PlayerCommands(this));
         Objects.requireNonNull(getCommand("abuddy")).setExecutor(new AdminCommands(this));
@@ -62,6 +62,12 @@ public final class BuddyBonus extends JavaPlugin {
 
     public ConfigManager getConfigManager() {
         return configManager;
+    }
+
+    public void debug(String message) {
+        if (configManager.getDebug()) {
+            Bukkit.getConsoleSender().sendMessage("BuddyBonus [DEBUG]: " + message);
+        }
     }
 
 }

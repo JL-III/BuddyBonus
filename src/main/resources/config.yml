@@ -1,5 +1,7 @@
 version: 0.0.1
 
+debug: true
+
 reward:
   amount: 100
 

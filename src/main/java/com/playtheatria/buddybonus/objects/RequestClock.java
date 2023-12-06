@@ -23,7 +23,7 @@ public class RequestClock {
                     if (System.currentTimeMillis() - request.time_stamp() > 20 * 300) {
                         RequestRemoveEvent event = new RequestRemoveEvent(request);
                         Bukkit.getPluginManager().callEvent(event);
-                        Bukkit.getConsoleSender().sendMessage("remove event fired due to request expiry");
+                        plugin.debug("remove event fired due to request expiry.");
                     }
                 }
                 // run every second to deal with the expiry
