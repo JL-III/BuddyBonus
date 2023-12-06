@@ -7,6 +7,7 @@ import com.playtheatria.buddybonus.events.RequestAcceptEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,6 +26,21 @@ public class PlayerCommands implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (commandSender instanceof Player player) {
             // handles /buddy remove, /buddy <name>, /buddy accept
+
+            if (args.length == 0) {
+                Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
+
+                if (buddyOptional.isPresent()) {
+                    OfflinePlayer buddy_one = Bukkit.getOfflinePlayer(buddyOptional.get().player_one_UUID());
+                    OfflinePlayer buddy_two = Bukkit.getOfflinePlayer(buddyOptional.get().player_two_UUID());
+
+                    player.sendMessage("Buddy: " + buddy_one.getName() + " - " + buddy_two.getName());
+                } else {
+                    player.sendMessage("You don't have a buddy! Go to discord and find someone to hop online!");
+                }
+                return true;
+            }
+
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("remove")) {
                     Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
