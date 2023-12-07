@@ -3,13 +3,17 @@ package com.playtheatria.buddybonus.commands;
 import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Request;
+import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 public class AdminCommands implements CommandExecutor {
 
@@ -37,6 +41,28 @@ public class AdminCommands implements CommandExecutor {
                 }
                 return true;
             }
+            if (args[0].equalsIgnoreCase("reload")) {
+                commandSender.sendMessage("BuddyBonus: reloading config");
+                plugin.getConfigManager().reload();
+                return true;
+            }
+        }
+        if (args.length == 2) {
+            if (!args[0].equalsIgnoreCase("disband")) return false;
+            Player player = Bukkit.getPlayer(args[1]);
+            if (player == null) {
+                plugin.debug("player was null in disband command.");
+                return true;
+            }
+            Optional<Buddy> optionalBuddy = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
+            if (optionalBuddy.isPresent()) {
+                plugin.debug("removing buddy from list.");
+                plugin.getBuddyList().remove(optionalBuddy.get());
+            } else {
+                commandSender.sendMessage("There is no buddy with this name!");
+                return true;
+            }
+            return true;
         }
         return false;
     }

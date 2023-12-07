@@ -4,11 +4,12 @@ debug: false
 
 reward:
   amount: 100
-
+# reward timer change in config requires restart
 # duration in seconds
 reward-timer:
   duration: 60
 
+# lifespan timer change requires restart
 # lifespan of a buddy request in seconds
 request:
   lifespan: 15
