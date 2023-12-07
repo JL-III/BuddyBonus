@@ -6,7 +6,9 @@ import com.playtheatria.buddybonus.commands.PlayerCommands;
 import com.playtheatria.buddybonus.config.ConfigManager;
 import com.playtheatria.buddybonus.listeners.*;
 import com.playtheatria.buddybonus.objects.*;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class BuddyBonus extends JavaPlugin {
-
+    private static Economy econ = null;
     private List<Buddy> buddyList = new CopyOnWriteArrayList<>();
     private List<Request> requestList = new CopyOnWriteArrayList<>();
     private final Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
@@ -22,6 +24,11 @@ public final class BuddyBonus extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (!setupEconomy() ) {
+            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         if (essentials == null) {
             Bukkit.getConsoleSender().sendMessage("BuddyBonus: essentials was not found, shutting down.");
             Bukkit.getPluginManager().disablePlugin(this);
@@ -68,6 +75,22 @@ public final class BuddyBonus extends JavaPlugin {
         if (configManager.getDebug()) {
             Bukkit.getConsoleSender().sendMessage("BuddyBonus [DEBUG]: " + message);
         }
+    }
+
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
+
+    public Economy getEconomy() {
+        return econ;
     }
 
 }

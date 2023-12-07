@@ -4,6 +4,7 @@ import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.BuddyCreateEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,8 +24,8 @@ public class BuddyCreate implements Listener {
         Player player_two = Bukkit.getPlayer(buddy.player_two_UUID());
 
         if (player_one != null && player_two != null) {
-            player_one.sendMessage("You are now buddies with " + player_two.getName());
-            player_two.sendMessage("You are now buddies with " + player_one.getName());
+            player_one.sendMessage(ChatColor.YELLOW + "You are now buddies with " + ChatColor.GREEN + player_two.getName() + ChatColor.YELLOW + "!");
+            player_two.sendMessage(ChatColor.YELLOW + "You are now buddies with " + ChatColor.GREEN + player_one.getName() + ChatColor.YELLOW + "!");
             plugin.getBuddyList().add(buddy);
         } else {
             plugin.debug("Something went wrong with buddy creation, let your loving owner know.");

@@ -30,7 +30,6 @@ public class ConfigManager {
 
     public boolean getDebug() { return plugin.getConfig().getBoolean(DEBUG); }
 
-
     public ConfigValidationResult isConfigValid() {
         ConfigValidationResult result = new ConfigValidationResult(true, "BuddyBonus: configuration values look valid!");
 

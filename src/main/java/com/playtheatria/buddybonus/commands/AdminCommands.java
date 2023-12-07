@@ -56,7 +56,7 @@ public class AdminCommands implements CommandExecutor {
             }
             Optional<Buddy> optionalBuddy = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
             if (optionalBuddy.isPresent()) {
-                plugin.debug("removing buddy from list.");
+                commandSender.sendMessage("removing buddy from list.");
                 plugin.getBuddyList().remove(optionalBuddy.get());
             } else {
                 commandSender.sendMessage("There is no buddy with this name!");

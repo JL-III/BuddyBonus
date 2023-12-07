@@ -7,6 +7,7 @@ import com.playtheatria.buddybonus.events.RequestAcceptEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,9 +35,12 @@ public class PlayerCommands implements CommandExecutor {
                     OfflinePlayer buddy_one = Bukkit.getOfflinePlayer(buddyOptional.get().player_one_UUID());
                     OfflinePlayer buddy_two = Bukkit.getOfflinePlayer(buddyOptional.get().player_two_UUID());
 
-                    player.sendMessage("Buddy: " + buddy_one.getName() + " - " + buddy_two.getName());
+                    player.sendMessage(ChatColor.YELLOW + "Buddy: "
+                            + ChatColor.GREEN + buddy_one.getName()
+                            + ChatColor.YELLOW + " - "
+                            + ChatColor.GREEN + buddy_two.getName());
                 } else {
-                    player.sendMessage("You don't have a buddy! Go to discord and find someone to hop online!");
+                    player.sendMessage(ChatColor.YELLOW + "You don't have a buddy! Go to discord and find someone to hop online!");
                 }
                 return true;
             }
@@ -46,7 +50,9 @@ public class PlayerCommands implements CommandExecutor {
                     Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
                     if (buddyOptional.isEmpty()) {
                         plugin.debug("no buddy found for player: " + player.getName());
+                        player.sendMessage(ChatColor.YELLOW + "You don't have a buddy!");
                     } else {
+                        player.sendMessage(ChatColor.YELLOW + "Removing buddy!");
                         Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddyOptional.get()));
                     }
                     return true;
@@ -59,8 +65,11 @@ public class PlayerCommands implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[0]);
 
                         assert target != null;
+                        player.sendMessage(ChatColor.YELLOW + "You sent a buddy request to " + ChatColor.GREEN + target.getName());
                         Bukkit.getPluginManager().callEvent(new BuddyRequestEvent(player.getUniqueId(), target.getUniqueId()));
                         return true;
+                    } else {
+                        player.sendMessage(ChatColor.YELLOW + "That is not a valid player, please check the spelling of the name.");
                     }
                 }
             }
