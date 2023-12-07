@@ -7,6 +7,8 @@ import com.playtheatria.buddybonus.events.RequestRemoveEvent;
 import com.playtheatria.buddybonus.objects.Request;
 import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -27,6 +29,12 @@ public class RequestAccept implements Listener {
             plugin.debug("firing buddy create event");
             Bukkit.getPluginManager().callEvent(new RequestRemoveEvent(optionalRequest.get()));
             plugin.debug("removing request since it was accepted");
+        } else {
+            Player player = Bukkit.getPlayer(event.getPlayer_uuid());
+            if (player != null) {
+                player.sendMessage(ChatColor.GOLD + "There are no pending buddy requests! Tell your buddy to do "
+                        + ChatColor.GREEN + " /buddy " + player.getName());
+            }
         }
     }
 }

@@ -35,12 +35,12 @@ public class PlayerCommands implements CommandExecutor {
                     OfflinePlayer buddy_one = Bukkit.getOfflinePlayer(buddyOptional.get().player_one_UUID());
                     OfflinePlayer buddy_two = Bukkit.getOfflinePlayer(buddyOptional.get().player_two_UUID());
 
-                    player.sendMessage(ChatColor.YELLOW + "Buddy: "
+                    player.sendMessage(ChatColor.GOLD + "Buddy: "
                             + ChatColor.GREEN + buddy_one.getName()
-                            + ChatColor.YELLOW + " - "
+                            + ChatColor.GOLD + " - "
                             + ChatColor.GREEN + buddy_two.getName());
                 } else {
-                    player.sendMessage(ChatColor.YELLOW + "You don't have a buddy! Go to discord and find someone to hop online!");
+                    player.sendMessage(ChatColor.GOLD + "You don't have a buddy! Go to discord and find someone to hop online!");
                 }
                 return true;
             }
@@ -50,9 +50,9 @@ public class PlayerCommands implements CommandExecutor {
                     Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
                     if (buddyOptional.isEmpty()) {
                         plugin.debug("no buddy found for player: " + player.getName());
-                        player.sendMessage(ChatColor.YELLOW + "You don't have a buddy!");
+                        player.sendMessage(ChatColor.GOLD + "You don't have a buddy!");
                     } else {
-                        player.sendMessage(ChatColor.YELLOW + "Removing buddy!");
+                        player.sendMessage(ChatColor.GOLD + "Removing buddy!");
                         Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(buddyOptional.get()));
                     }
                     return true;
@@ -68,7 +68,7 @@ public class PlayerCommands implements CommandExecutor {
                         Bukkit.getPluginManager().callEvent(new BuddyRequestEvent(player.getUniqueId(), target.getUniqueId()));
                         return true;
                     } else {
-                        player.sendMessage(ChatColor.YELLOW + "That is not a valid player, please check the spelling of the name.");
+                        player.sendMessage(ChatColor.GOLD + "That is not a valid player, please check the spelling of the name.");
                         return true;
                     }
                 }

@@ -2,11 +2,9 @@ package com.playtheatria.buddybonus.listeners;
 
 import com.playtheatria.buddybonus.BuddyBonus;
 import com.playtheatria.buddybonus.events.RewardEvent;
-import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,7 +35,7 @@ public class Reward implements Listener {
         Double ending_balance = plugin.getEconomy().getBalance(player);
 
         if (player_one_eco_response.transactionSuccess()) {
-            player.sendMessage(ChatColor.YELLOW + "You received a buddy reward of " + ChatColor.GREEN + event.getReward() + ChatColor.YELLOW + "!");
+            player.sendMessage(ChatColor.GOLD + "You received a buddy reward of " + ChatColor.GREEN + event.getReward() + ChatColor.GOLD + "!");
             plugin.debug(player.getName() + " received a buddy bonus reward of " + event.getReward());
             plugin.debug("beginning balance: " + beginning_balance);
             plugin.debug("reward amount: " + event.getReward());

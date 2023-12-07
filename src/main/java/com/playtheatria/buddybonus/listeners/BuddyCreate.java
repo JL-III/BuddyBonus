@@ -24,8 +24,8 @@ public class BuddyCreate implements Listener {
         Player player_two = Bukkit.getPlayer(buddy.player_two_UUID());
 
         if (player_one != null && player_two != null) {
-            player_one.sendMessage(ChatColor.YELLOW + "You are now buddies with " + ChatColor.GREEN + player_two.getName() + ChatColor.YELLOW + "!");
-            player_two.sendMessage(ChatColor.YELLOW + "You are now buddies with " + ChatColor.GREEN + player_one.getName() + ChatColor.YELLOW + "!");
+            player_one.sendMessage(ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_two.getName() + ChatColor.GOLD + "!");
+            player_two.sendMessage(ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + "!");
             plugin.getBuddyList().add(buddy);
         } else {
             plugin.debug("Something went wrong with buddy creation, let your loving owner know.");
