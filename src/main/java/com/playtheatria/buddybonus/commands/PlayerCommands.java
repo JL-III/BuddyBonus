@@ -65,11 +65,11 @@ public class PlayerCommands implements CommandExecutor {
                         Player target = Bukkit.getPlayer(args[0]);
 
                         assert target != null;
-                        player.sendMessage(ChatColor.YELLOW + "You sent a buddy request to " + ChatColor.GREEN + target.getName());
                         Bukkit.getPluginManager().callEvent(new BuddyRequestEvent(player.getUniqueId(), target.getUniqueId()));
                         return true;
                     } else {
                         player.sendMessage(ChatColor.YELLOW + "That is not a valid player, please check the spelling of the name.");
+                        return true;
                     }
                 }
             }

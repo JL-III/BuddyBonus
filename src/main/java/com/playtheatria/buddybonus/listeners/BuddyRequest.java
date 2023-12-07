@@ -33,25 +33,33 @@ public class BuddyRequest implements Listener {
         Optional<Request> optionalRequestTarget = Utils.getOptionalRequestFromRequestList(plugin.getRequestList(), target.getUniqueId());
 
         if (optionalBuddy.isPresent()) {
-            initiate.sendMessage("You are already buddies with someone else, free room up for a new bud with /buddy remove");
+            initiate.sendMessage(ChatColor.YELLOW + "You are already buddies with someone else, free room up for a new bud with "
+                    + ChatColor.GREEN + "/buddy remove");
+            return;
         }
         if (optionalBuddyTarget.isPresent()) {
-            initiate.sendMessage("That player already has a buddy! Ask them to upgrade their buddy with /buddy remove and then /buddy " + initiate.getName());
+            initiate.sendMessage(ChatColor.YELLOW + "That player already has a buddy! Ask them to upgrade their buddy with "
+                    + ChatColor.GREEN + "/buddy remove"
+                    + ChatColor.YELLOW + " and then "
+                    + ChatColor.GREEN + " /buddy " + initiate.getName());
+            return;
         }
         if (optionalRequest.isPresent()) {
-            //TODO!!!
-            // this needs to take in the config settings when we add it - also the math is wrong lol
-            initiate.sendMessage("You already have already sent a buddy request! Wait " + (optionalRequest.get().time_stamp() - System.currentTimeMillis() * 20) + " seconds before requesting a new one!");
+            initiate.sendMessage(ChatColor.YELLOW + "You have already sent a buddy request! Wait "
+                    + ChatColor.GREEN + "a few seconds"
+                    + ChatColor.YELLOW + " before requesting a new one!");
+            return;
         }
         if (optionalRequestTarget.isPresent()) {
             initiate.sendMessage(target.getName() + " has a pending buddy request, please wait until their current request has expired.");
+            return;
         }
         if (optionalBuddy.isEmpty() && optionalBuddyTarget.isEmpty() && optionalRequest.isEmpty() && optionalRequestTarget.isEmpty()) {
             plugin.getRequestList().add(new Request(event.getPlayer_initiate(), event.getPlayer_target(), System.currentTimeMillis()));
-            initiate.sendMessage("You've invited " + target.getName() + " to be your buddy! Hope they accept...");
+            initiate.sendMessage(ChatColor.YELLOW + "You've invited " + ChatColor.GREEN + target.getName() + ChatColor.YELLOW + " to be your buddy! Hope they accept...");
             target.sendMessage(
                     ChatColor.GREEN + initiate.getName() + ChatColor.GOLD + " has sent you a buddy request! Use "
-                    + ChatColor.GREEN + "/buddy accept" + ChatColor.GOLD + " within " + ChatColor.YELLOW + "5"
+                    + ChatColor.GREEN + "/buddy accept" + ChatColor.GOLD + " within " + ChatColor.YELLOW + plugin.getConfigManager().getRequestLifespan()
                             + ChatColor.GOLD + " seconds to accept!");
             plugin.debug("created a new request for " + initiate.getName() + " and " + target.getName());
         }
