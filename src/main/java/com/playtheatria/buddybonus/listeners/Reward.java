@@ -31,11 +31,22 @@ public class Reward implements Listener {
 
     private void sendEcoReward(Player player, RewardEvent event) {
         Double beginning_balance = plugin.getEconomy().getBalance(player);
-        EconomyResponse player_one_eco_response = plugin.getEconomy().depositPlayer(player, event.getReward());
+        EconomyResponse eco_response = plugin.getEconomy().depositPlayer(player, event.getReward());
         Double ending_balance = plugin.getEconomy().getBalance(player);
 
-        if (player_one_eco_response.transactionSuccess()) {
-            player.sendMessage(ChatColor.GOLD + "You received a buddy reward of " + ChatColor.GREEN + event.getReward() + ChatColor.GOLD + "!");
+        if (eco_response.transactionSuccess()) {
+
+            boolean notify = true;
+
+            if (plugin.getPlayerNotification().containsKey(player.getUniqueId())
+                    && !plugin.getPlayerNotification().get(player.getUniqueId())) {
+                plugin.debug("reward notifications for " + player.getName() + " are turned off.");
+                notify = false;
+            }
+
+            if (notify) {
+                player.sendMessage(ChatColor.GOLD + "You received a buddy reward of " + ChatColor.GREEN + event.getReward() + ChatColor.GOLD + "!");
+            }
             plugin.debug(player.getName() + " received a buddy bonus reward of " + event.getReward());
             plugin.debug("beginning balance: " + beginning_balance);
             plugin.debug("reward amount: " + event.getReward());

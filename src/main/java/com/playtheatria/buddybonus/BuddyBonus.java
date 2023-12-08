@@ -11,14 +11,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class BuddyBonus extends JavaPlugin {
     private static Economy econ = null;
     private List<Buddy> buddyList = new CopyOnWriteArrayList<>();
     private List<Request> requestList = new CopyOnWriteArrayList<>();
+    private HashMap<UUID, Boolean> playerNotification = new HashMap<>();
     private final Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
     private final ConfigManager configManager = new ConfigManager(this);
 
@@ -56,6 +59,8 @@ public final class BuddyBonus extends JavaPlugin {
     }
 
     public List<Request> getRequestList() { return requestList; }
+
+    public HashMap<UUID, Boolean> getPlayerNotification() { return playerNotification; }
 
     public void validateConfig() {
         ConfigValidationResult configValidationResult = configManager.isConfigValid();
