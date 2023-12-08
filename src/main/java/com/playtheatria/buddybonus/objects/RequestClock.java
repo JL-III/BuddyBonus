@@ -20,7 +20,8 @@ public class RequestClock {
             @Override
             public void run() {
                 for (Request request: requestList) {
-                    if (System.currentTimeMillis() - request.time_stamp() > 20 * 300) {
+                    // what is this math here?
+                    if ((System.currentTimeMillis() - request.time_stamp()) / 1000 > plugin.getConfigManager().getRequestLifespan()) {
                         RequestRemoveEvent event = new RequestRemoveEvent(request);
                         Bukkit.getPluginManager().callEvent(event);
                         plugin.debug("remove event fired due to request expiry.");
@@ -28,6 +29,6 @@ public class RequestClock {
                 }
                 // run every second to deal with the expiry
             }
-        }.runTaskTimer(plugin, 0, 20 * plugin.getConfigManager().getRequestLifespan());
+        }.runTaskTimer(plugin, 0, 20);
     }
 }

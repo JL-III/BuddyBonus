@@ -10,8 +10,10 @@ commands:
       /<command> <name>
       /<command> remove
       /<command> accept
+      /<command> notify
   abuddy:
     description: admin commands
     usage: |
       /<command> requests
       /<command> buddies
+      /<command> reload
