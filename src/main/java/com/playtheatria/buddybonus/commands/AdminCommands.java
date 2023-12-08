@@ -24,6 +24,10 @@ public class AdminCommands implements CommandExecutor {
     }
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+        if (commandSender.hasPermission("buddy.admin")) {
+            commandSender.sendMessage("You do not have permission to use admin commands.");
+            return true;
+        }
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
                 commandSender.sendMessage(ChatColor.GREEN + "Current Buddies and Requests: ");
