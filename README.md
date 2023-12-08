@@ -20,3 +20,7 @@ admin:
 Requirements:
 - players are not afk
 - players are within 100 blocks of each other
+
+Depends on:
+- essentials
+- vault
