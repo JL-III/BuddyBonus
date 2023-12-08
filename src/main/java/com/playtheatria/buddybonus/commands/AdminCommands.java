@@ -24,7 +24,7 @@ public class AdminCommands implements CommandExecutor {
     }
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
-        if (commandSender.hasPermission("buddy.admin")) {
+        if (!commandSender.hasPermission("buddy.admin")) {
             commandSender.sendMessage("You do not have permission to use admin commands.");
             return true;
         }
