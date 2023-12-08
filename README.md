@@ -6,10 +6,10 @@ Todo:
 - add bonus modifiers over time
 
 How to use:
-- `/buddy <name>` - send a buddy request to someone
+- `/buddy add <name>` - send a buddy request to someone
 - `/buddy accept` - accepts incoming request
 - `/buddy remove` - remove your buddy
-- `/buddy notify` - remove notifications for rewards.
+- `/buddy notify` - toggle notifications for rewards.
 - `/buddy` - check if you have a buddy and if so, who it is.
 
 admin:

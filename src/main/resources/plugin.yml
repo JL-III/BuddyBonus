@@ -7,13 +7,13 @@ commands:
   buddy:
     description: for the buddies system
     usage: |
-      /<command> <name>
+      /<command> add <name>
       /<command> remove
       /<command> accept
       /<command> notify
   abuddy:
     description: admin commands
     usage: |
-      /<command> requests
-      /<command> buddies
+      /<command> list
+      /<command> disband <name>
       /<command> reload
