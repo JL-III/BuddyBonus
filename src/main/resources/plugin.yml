@@ -2,7 +2,7 @@ name: BuddyBonus
 version: '${project.version}'
 main: com.playtheatria.buddybonus.BuddyBonus
 api-version: '1.20'
-depend: [Essentials]
+depend: [Essentials, Vault]
 commands:
   buddy:
     description: for the buddies system
