@@ -8,9 +8,8 @@ public class ConfigManager {
     private final String reward_timer_duration = "reward-timer.duration";
     private final String reward_amount = "reward.amount";
     private final String request_lifespan = "request.lifespan";
-    private final String debug = "debug";
 
-    private BuddyBonus plugin;
+    private final BuddyBonus plugin;
 
     public ConfigManager(BuddyBonus plugin) {
         this.plugin = plugin;
@@ -28,7 +27,10 @@ public class ConfigManager {
 
     public int getRequestLifespan() { return plugin.getConfig().getInt(request_lifespan); }
 
-    public boolean getDebug() { return plugin.getConfig().getBoolean(debug); }
+    public boolean getDebug() {
+        String debug = "debug";
+        return plugin.getConfig().getBoolean(debug);
+    }
 
     public ConfigValidationResult isConfigValid() {
         ConfigValidationResult result = new ConfigValidationResult(true, "BuddyBonus: configuration values look valid!");
