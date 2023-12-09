@@ -5,12 +5,12 @@ debug: false
 # reward.amount will only accept whole numbers
 reward:
   amount: 100
-# reward timer change in config requires restart
+# reward-timer.duration change requires restart
 # duration in seconds
 reward-timer:
   duration: 60
 
-# lifespan timer change requires restart
+# request.lifespan change requires restart
 # lifespan of a buddy request in seconds
 request:
   lifespan: 15
