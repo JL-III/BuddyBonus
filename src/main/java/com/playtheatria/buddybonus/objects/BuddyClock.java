@@ -8,8 +8,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.List;
 
 public class BuddyClock {
+
     private final BuddyBonus plugin;
+
     private final List<Buddy> buddyList;
+
     public BuddyClock(BuddyBonus plugin, List<Buddy> buddyList) {
         this.plugin = plugin;
         this.buddyList = buddyList;

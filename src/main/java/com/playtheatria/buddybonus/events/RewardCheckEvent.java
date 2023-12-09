@@ -6,10 +6,13 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 public class RewardCheckEvent extends Event {
+
     private static final HandlerList HANDLERS = new HandlerList();
+
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
+
     @Override
     public @NotNull HandlerList getHandlers() {
         return HANDLERS;
@@ -20,6 +23,7 @@ public class RewardCheckEvent extends Event {
     public RewardCheckEvent(Buddy buddy) {
         this.buddy = buddy;
     }
+
     public Buddy getBuddy() {
         return buddy;
     }

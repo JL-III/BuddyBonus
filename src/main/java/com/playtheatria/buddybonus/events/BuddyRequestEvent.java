@@ -7,16 +7,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.UUID;
 
 public class BuddyRequestEvent extends Event {
+
     private static final HandlerList HANDLERS = new HandlerList();
+
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
+
     @Override
     public @NotNull HandlerList getHandlers() {
         return HANDLERS;
     }
 
     private final UUID player_initiate;
+
     private final UUID player_target;
 
     public BuddyRequestEvent(@NotNull UUID player_initiate, @NotNull UUID player_target) {

@@ -1,7 +1,9 @@
 package com.playtheatria.buddybonus.objects;
 
 public class ConfigValidationResult {
+
     private boolean isValid;
+
     private String message;
 
     public ConfigValidationResult(boolean isValid, String message) {

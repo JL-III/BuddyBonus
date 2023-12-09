@@ -18,11 +18,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class BuddyBonus extends JavaPlugin {
+
     private static Economy econ = null;
-    private List<Buddy> buddyList = new CopyOnWriteArrayList<>();
-    private List<Request> requestList = new CopyOnWriteArrayList<>();
-    private ConcurrentHashMap<UUID, Boolean> playerNotification = new ConcurrentHashMap<>();
+
+    private final List<Buddy> buddyList = new CopyOnWriteArrayList<>();
+
+    private final List<Request> requestList = new CopyOnWriteArrayList<>();
+
+    private final ConcurrentHashMap<UUID, Boolean> playerNotification = new ConcurrentHashMap<>();
+
     private final Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
+
     private final ConfigManager configManager = new ConfigManager(this);
 
     @Override
