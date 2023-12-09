@@ -5,10 +5,10 @@ import com.playtheatria.buddybonus.objects.ConfigValidationResult;
 
 public class ConfigManager {
 
-    private final String REWARD_TIMER_DURATION = "reward-timer.duration";
-    private final String REWARD_AMOUNT = "reward.amount";
-    private final String REQUEST_LIFESPAN = "request.lifespan";
-    private final String DEBUG = "debug";
+    private final String reward_timer_duration = "reward-timer.duration";
+    private final String reward_amount = "reward.amount";
+    private final String request_lifespan = "request.lifespan";
+    private final String debug = "debug";
 
     private BuddyBonus plugin;
 
@@ -20,34 +20,34 @@ public class ConfigManager {
         plugin.reloadConfig();
     }
 
-    public int getReward_amount() {
-        return plugin.getConfig().getInt(REWARD_AMOUNT);
+    public int getRewardBaseAmount() {
+        return plugin.getConfig().getInt(reward_amount);
     }
 
-    public int getRewardTimerDuration() { return plugin.getConfig().getInt(REWARD_TIMER_DURATION); }
+    public int getRewardTimerDuration() { return plugin.getConfig().getInt(reward_timer_duration); }
 
-    public int getRequestLifespan() { return plugin.getConfig().getInt(REQUEST_LIFESPAN); }
+    public int getRequestLifespan() { return plugin.getConfig().getInt(request_lifespan); }
 
-    public boolean getDebug() { return plugin.getConfig().getBoolean(DEBUG); }
+    public boolean getDebug() { return plugin.getConfig().getBoolean(debug); }
 
     public ConfigValidationResult isConfigValid() {
         ConfigValidationResult result = new ConfigValidationResult(true, "BuddyBonus: configuration values look valid!");
 
-        if (plugin.getConfig().getInt(REWARD_AMOUNT) == 0) {
+        if (plugin.getConfig().getInt(reward_amount) == 0) {
             result.setValid(false);
-            result.setMessage("BuddyBonus: reward amount must be greater than 0, make sure you have set a value for " + REWARD_AMOUNT);
+            result.setMessage("BuddyBonus: reward amount must be greater than 0, make sure you have set a value for " + reward_amount);
             return result;
         }
 
-        if (plugin.getConfig().getInt(REWARD_TIMER_DURATION) == 0) {
+        if (plugin.getConfig().getInt(reward_timer_duration) == 0) {
             result.setValid(false);
-            result.setMessage("BuddyBonus: reward amount must be greater than 0, make sure you have set a value for " + REWARD_TIMER_DURATION);
+            result.setMessage("BuddyBonus: reward amount must be greater than 0, make sure you have set a value for " + reward_timer_duration);
             return result;
         }
 
-        if (plugin.getConfig().getInt(REQUEST_LIFESPAN) == 0) {
+        if (plugin.getConfig().getInt(request_lifespan) == 0) {
             result.setValid(false);
-            result.setMessage("BuddyBonus: request lifespan must be greater than 0, make sure you have set a value for " + REQUEST_LIFESPAN);
+            result.setMessage("BuddyBonus: request lifespan must be greater than 0, make sure you have set a value for " + request_lifespan);
             return result;
         }
 

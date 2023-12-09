@@ -19,13 +19,13 @@ public class BuddyCreate implements Listener {
 
     @EventHandler
     public void onBuddyCreateEvent(BuddyCreateEvent event) {
-        Buddy buddy = new Buddy(event.getRequest().player_one_UUID(), event.getRequest().player_two_UUID());
-        Player player_one = Bukkit.getPlayer(buddy.player_one_UUID());
-        Player player_two = Bukkit.getPlayer(buddy.player_two_UUID());
+        Player player_one = Bukkit.getPlayer(event.getRequest().player_one_UUID());
+        Player player_two = Bukkit.getPlayer(event.getRequest().player_two_UUID());
+        Buddy buddy = new Buddy(event.getRequest().player_one_UUID(), event.getRequest().player_two_UUID(), System.currentTimeMillis());
 
         if (player_one != null && player_two != null) {
-            player_one.sendMessage(ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_two.getName() + ChatColor.GOLD + "!");
-            player_two.sendMessage(ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + "!");
+            player_one.sendMessage(ChatColor.GREEN + "Buddy request accepted! " + ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_two.getName() + ChatColor.GOLD + "!");
+            player_two.sendMessage(ChatColor.GREEN + "Buddy request accepted! " + ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + "!");
             plugin.getBuddyList().add(buddy);
         } else {
             plugin.debug("Something went wrong with buddy creation, let your loving owner know.");

@@ -2,6 +2,7 @@ version: 0.0.1
 
 debug: false
 
+# reward.amount will only accept whole numbers
 reward:
   amount: 100
 # reward timer change in config requires restart

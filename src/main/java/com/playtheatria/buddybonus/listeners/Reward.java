@@ -30,8 +30,9 @@ public class Reward implements Listener {
     }
 
     private void sendEcoReward(Player player, RewardEvent event) {
+        int reward_amount = getRewardAmount(event);
         Double beginning_balance = plugin.getEconomy().getBalance(player);
-        EconomyResponse eco_response = plugin.getEconomy().depositPlayer(player, event.getReward());
+        EconomyResponse eco_response = plugin.getEconomy().depositPlayer(player, reward_amount);
         Double ending_balance = plugin.getEconomy().getBalance(player);
 
         if (eco_response.transactionSuccess()) {
@@ -45,18 +46,45 @@ public class Reward implements Listener {
             }
 
             if (notify) {
-                player.sendMessage(ChatColor.GOLD + "You received a buddy reward of " + ChatColor.GREEN + event.getReward() + ChatColor.GOLD + "!");
+                player.sendMessage(ChatColor.GOLD + "You received a buddy reward of " + ChatColor.GREEN + reward_amount + ChatColor.GOLD + "!");
             }
-            plugin.debug(player.getName() + " received a buddy bonus reward of " + event.getReward());
+            plugin.debug(player.getName() + " received a buddy bonus reward of " + reward_amount);
             plugin.debug("beginning balance: " + beginning_balance);
-            plugin.debug("reward amount: " + event.getReward());
+            plugin.debug("reward amount: " + reward_amount);
             plugin.debug("final balance: " + ending_balance);
         } else {
             player.sendMessage(ChatColor.DARK_RED + "An error occurred! Please let an admin know!");
             Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "BuddyBonus Error!");
-            Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "There was an error trying to reward " + player.getName() + " for the amount of " + event.getReward());
+            Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "There was an error trying to reward " + player.getName() + " for the amount of " + reward_amount);
             Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Beginning balance: " + beginning_balance);
             Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_RED + "Ending balance: " + ending_balance);
         }
     }
+
+    private int getRewardAmount(RewardEvent event) {
+        long time_comparison = ((System.currentTimeMillis() - event.getBuddy().creation_time_stamp()) / 1000) / 60;
+        plugin.debug("time comparison result: " + time_comparison);
+        // every ten minutes players are in a buddy they will get an increase in earnings via multiplier
+        // buddies are disbanded when a player logs out. they will have to rebuild their multiplier if they log out
+        // however if buddies are afk or if they are not close enough, they will retain their multiplier
+
+        if (time_comparison >= 40) {
+            plugin.debug("rewarding a buddy with multiplier of 5!");
+            return event.getBaseReward() * 5;
+        }
+        if (time_comparison >= 30) {
+            plugin.debug("rewarding a buddy with multiplier of 4!");
+            return event.getBaseReward() * 4;
+        }
+        if (time_comparison >= 20) {
+            plugin.debug("rewarding a buddy with multiplier of 3!");
+            return event.getBaseReward() * 3;
+        }
+        if (time_comparison >= 10) {
+            plugin.debug("rewarding a buddy with multiplier of 2!");
+            return event.getBaseReward() * 2;
+        }
+        return event.getBaseReward();
+    }
+
 }

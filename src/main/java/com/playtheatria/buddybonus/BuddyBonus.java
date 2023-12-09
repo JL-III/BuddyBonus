@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -53,7 +52,7 @@ public final class BuddyBonus extends JavaPlugin {
         Objects.requireNonNull(getCommand("abuddy")).setExecutor(new AdminCommands(this));
 
         new BuddyClock(this, buddyList).run();
-        new RequestClock(this, requestList).run();
+        new RequestLifeCycleClock(this, requestList).run();
     }
 
     public List<Buddy> getBuddyList() {
@@ -80,7 +79,7 @@ public final class BuddyBonus extends JavaPlugin {
 
     public void debug(String message) {
         if (configManager.getDebug()) {
-            Bukkit.getConsoleSender().sendMessage("BuddyBonus [DEBUG]: " + message);
+            Bukkit.getConsoleSender().sendMessage("[DEBUG] BuddyBonus: " + message);
         }
     }
 
@@ -99,5 +98,7 @@ public final class BuddyBonus extends JavaPlugin {
     public Economy getEconomy() {
         return econ;
     }
+
+    public Essentials getEssentials() { return essentials; }
 
 }

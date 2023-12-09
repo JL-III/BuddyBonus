@@ -7,10 +7,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public class RequestClock {
+public class RequestLifeCycleClock {
     private final BuddyBonus plugin;
     private final List<Request> requestList;
-    public RequestClock(BuddyBonus plugin, List<Request> requestList) {
+    public RequestLifeCycleClock(BuddyBonus plugin, List<Request> requestList) {
         this.plugin = plugin;
         this.requestList = requestList;
     }

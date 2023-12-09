@@ -8,18 +8,18 @@ import org.jetbrains.annotations.NotNull;
 public class RewardEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
     private final Buddy buddy;
-    private final int reward;
+    private final int base_reward;
 
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
     @Override
     public @NotNull HandlerList getHandlers() { return HANDLERS; }
-    public RewardEvent(Buddy buddy, int reward) {
+    public RewardEvent(Buddy buddy, int base_reward) {
         this.buddy = buddy;
-        this.reward = reward;
+        this.base_reward = base_reward;
     }
     public Buddy getBuddy() { return buddy; }
-    public int getReward() { return reward; }
+    public int getBaseReward() { return base_reward; }
 
 }

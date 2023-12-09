@@ -5,6 +5,7 @@ import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
 import com.playtheatria.buddybonus.events.ChangeNotifyRewardEvent;
 import com.playtheatria.buddybonus.events.RequestAcceptEvent;
+import com.playtheatria.buddybonus.listeners.RewardCheck;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.utils.Utils;
 import org.bukkit.Bukkit;
@@ -54,10 +55,15 @@ public class PlayerCommands implements CommandExecutor, TabCompleter {
                     OfflinePlayer buddy_one = Bukkit.getOfflinePlayer(buddyOptional.get().player_one_UUID());
                     OfflinePlayer buddy_two = Bukkit.getOfflinePlayer(buddyOptional.get().player_two_UUID());
 
+                    boolean active = RewardCheck.playersAreBothActive(plugin, buddy_one.getUniqueId(), buddy_two.getUniqueId());
+                    boolean within_range = RewardCheck.playersAreWithinDistance(plugin, buddy_one.getUniqueId(), buddy_two.getUniqueId());
+
                     player.sendMessage(ChatColor.GOLD + "Buddy: "
                             + ChatColor.GREEN + buddy_one.getName()
-                            + ChatColor.GOLD + " - "
+                            + ChatColor.GOLD + " <-> "
                             + ChatColor.GREEN + buddy_two.getName());
+                    player.sendMessage(ChatColor.GOLD + " - both active: " + (active ? ChatColor.GREEN : ChatColor.RED) + active);
+                    player.sendMessage(ChatColor.GOLD + " - within 100 blocks:" + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
                 } else {
                     player.sendMessage(ChatColor.GOLD + "You don't have a buddy! Go to discord and find someone to hop online!");
                 }

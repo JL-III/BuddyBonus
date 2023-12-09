@@ -31,17 +31,17 @@ public class AdminCommands implements CommandExecutor {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("list")) {
                 commandSender.sendMessage(ChatColor.GREEN + "Current Buddies and Requests: ");
-                commandSender.sendMessage( ChatColor.AQUA + "Requests: ");
+                commandSender.sendMessage(ChatColor.GOLD + "Requests: " + (plugin.getRequestList().size() == 0 ? ChatColor.RED + "None" : ""));
                 for (Request request : plugin.getRequestList()) {
                     OfflinePlayer player_one = Bukkit.getOfflinePlayer(request.player_one_UUID());
                     OfflinePlayer player_two = Bukkit.getOfflinePlayer(request.player_two_UUID());
-                    commandSender.sendMessage("Request: " + player_one.getName() + " - " + player_two.getName());
+                    commandSender.sendMessage(ChatColor.GOLD + "-" + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + " <-> " + ChatColor.GREEN + player_two.getName());
                 }
-                commandSender.sendMessage( ChatColor.AQUA + "Buddies: ");
+                commandSender.sendMessage(ChatColor.GOLD + "Buddies: " + (plugin.getBuddyList().size() == 0 ? ChatColor.RED + "None" : ""));
                 for (Buddy buddy : plugin.getBuddyList()) {
                     OfflinePlayer player_one = Bukkit.getOfflinePlayer(buddy.player_one_UUID());
                     OfflinePlayer player_two = Bukkit.getOfflinePlayer(buddy.player_two_UUID());
-                    commandSender.sendMessage("Buddy: " + player_one.getName() + " - " + player_two.getName());
+                    commandSender.sendMessage(ChatColor.GOLD + "-" + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + " <-> " + ChatColor.GREEN + player_two.getName());
                 }
                 return true;
             }

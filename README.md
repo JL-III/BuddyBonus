@@ -2,9 +2,6 @@
 
 Players that play together earn bonus money together.
 
-Todo:
-- add bonus modifiers over time
-
 How to use:
 - `/buddy add <name>` - send a buddy request to someone
 - `/buddy accept` - accepts incoming request
