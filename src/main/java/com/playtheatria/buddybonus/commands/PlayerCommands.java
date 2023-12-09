@@ -63,7 +63,7 @@ public class PlayerCommands implements CommandExecutor, TabCompleter {
                             + ChatColor.GOLD + " <-> "
                             + ChatColor.GREEN + buddy_two.getName());
                     player.sendMessage(ChatColor.GOLD + " - both active: " + (active ? ChatColor.GREEN : ChatColor.RED) + active);
-                    player.sendMessage(ChatColor.GOLD + " - within 100 blocks:" + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
+                    player.sendMessage(ChatColor.GOLD + " - within 100 blocks: " + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
                 } else {
                     player.sendMessage(ChatColor.GOLD + "You don't have a buddy! Go to discord and find someone to hop online!");
                 }
