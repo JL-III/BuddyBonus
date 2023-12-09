@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.commands;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.listeners.RewardCheck;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Request;
 import com.playtheatria.buddybonus.utils.Utils;
@@ -41,7 +42,12 @@ public class AdminCommands implements CommandExecutor {
                 for (Buddy buddy : plugin.getBuddyList()) {
                     OfflinePlayer player_one = Bukkit.getOfflinePlayer(buddy.player_one_UUID());
                     OfflinePlayer player_two = Bukkit.getOfflinePlayer(buddy.player_two_UUID());
+
+                    boolean active = RewardCheck.playersAreBothActive(plugin, player_one.getUniqueId(), player_two.getUniqueId());
+                    boolean within_range = RewardCheck.playersAreWithinDistance(plugin, player_one.getUniqueId(), player_two.getUniqueId());
                     commandSender.sendMessage(ChatColor.GOLD + "-" + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + " <-> " + ChatColor.GREEN + player_two.getName());
+                    commandSender.sendMessage(ChatColor.GOLD + " - both active: " + (active ? ChatColor.GREEN : ChatColor.RED) + active);
+                    commandSender.sendMessage(ChatColor.GOLD + " - within 100 blocks: " + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
                 }
                 return true;
             }
