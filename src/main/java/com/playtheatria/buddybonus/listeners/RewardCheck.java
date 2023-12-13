@@ -6,10 +6,12 @@ import com.playtheatria.buddybonus.events.RewardEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.events.RewardCheckEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import java.util.Locale;
 import java.util.UUID;
 
 public class RewardCheck implements Listener {
@@ -54,9 +56,15 @@ public class RewardCheck implements Listener {
             plugin.debug("players are not in the same world");
             return false;
         }
-        if (player_one.getLocation().getBlockX() - player_two.getLocation().getBlockX() > 100
-        || player_one.getLocation().getBlockZ() - player_two.getLocation().getBlockZ() > 100) {
-            plugin.debug("players are not close enough");
+
+        Location loc1 = player_one.getLocation();
+        Location loc2 = player_two.getLocation();
+
+        double distance = loc1.distance(loc2);
+        plugin.debug("Players are " + distance + " apart.");
+
+        if (distance > 100) {
+            plugin.debug("Players are not close enough");
             return false;
         }
         return true;
