@@ -11,12 +11,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.Locale;
 import java.util.UUID;
 
 public class RewardCheck implements Listener {
+
     private BuddyBonus plugin;
+
     private final Essentials essentials;
+
     public RewardCheck(BuddyBonus plugin, Essentials essentials) {
         this.plugin = plugin;
         this.essentials = essentials;
@@ -31,6 +33,7 @@ public class RewardCheck implements Listener {
             plugin.debug("buddy doesn't qualify");
         }
     }
+
     public static boolean isQualified(BuddyBonus plugin, Buddy buddy) {
 
         if (!playersAreWithinDistance(plugin, buddy.player_one_UUID(), buddy.player_two_UUID())) return  false;
@@ -90,5 +93,4 @@ public class RewardCheck implements Listener {
         }
         return true;
     }
-
 }
