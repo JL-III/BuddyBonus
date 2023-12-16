@@ -24,7 +24,8 @@ public class BuddyLifecycleClock {
 
             @Override
             public void run() {
-                plugin.debug("checking buddies in audit list for log out length", DebugType.INFO);
+                if (buddyAuditList.isEmpty()) return;
+                plugin.debug("checking buddies in audit list for log out length", DebugType.ACTION);
                 plugin.debug("buddies in audit list: " + buddyAuditList.size(), DebugType.INFO);
                 buddyAuditList.forEach((buddy, timestamp) -> {
                     if (isOverLimit(timestamp)) {
@@ -47,6 +48,7 @@ public class BuddyLifecycleClock {
             plugin.debug("found buddy to be over limit - calculation result: " + ((System.currentTimeMillis() - timestamp) / 1000), DebugType.INFO);
             return true;
         } else {
+            plugin.debug("found buddy to be under limit - calculation result: " + ((System.currentTimeMillis() - timestamp) / 1000), DebugType.INFO);
             return false;
         }
     }

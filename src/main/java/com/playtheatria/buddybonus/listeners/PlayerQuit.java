@@ -29,8 +29,13 @@ public class PlayerQuit implements Listener {
 
         if (optionalBuddy.isPresent()) {
             // player logs out - we load them into the audit list
-            plugin.getBuddyAuditList().put(optionalBuddy.get(), System.currentTimeMillis());
-            plugin.debug("BuddyBonus: sent buddy to audit list for " + event.getPlayer().getName() + " for logging out.", DebugType.ACTION);
+            if (!plugin.getBuddyAuditList().containsKey(optionalBuddy.get())) {
+                plugin.getBuddyAuditList().put(optionalBuddy.get(), System.currentTimeMillis());
+                plugin.debug("BuddyBonus: sent buddy to audit list for " + event.getPlayer().getName() + " for logging out.", DebugType.ACTION);
+            } else {
+                plugin.debug("BuddyBonus: buddy for " + event.getPlayer().getName() + " is already in audit list, continuing to use old entry.", DebugType.INFO);
+            }
+
         }
 
         if (optionalRequest.isPresent()) {
