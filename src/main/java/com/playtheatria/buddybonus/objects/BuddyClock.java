@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.objects;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.RewardCheckEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -23,7 +24,7 @@ public class BuddyClock {
             @Override
             public void run() {
                 for (Buddy buddy: buddyList) {
-                    plugin.debug("sending check event!");
+                    plugin.debug("sending check event!", DebugType.ACTION);
                     RewardCheckEvent event = new RewardCheckEvent(buddy);
                     Bukkit.getPluginManager().callEvent(event);
                 }

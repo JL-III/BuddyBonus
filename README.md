@@ -6,7 +6,7 @@ BuddyBonus allows you to team up with a friend - your "Buddy" - and earn extra i
 ### How Does It Work?
 **Pair Up**: Use `/buddy add <name>` to send a buddy request. Accept incoming requests with `/buddy accept`.  
 
-**Stay Close**: Make sure you and your Buddy are within 100 blocks of each other to activate the bonuses.  
+**Stay Close**: Make sure you and your Buddy are within 250 blocks of each other to activate the bonuses.  
 
 **Earn More**: Every 10 minutes you spend with your Buddy, your earnings multiplier increases, up to 5x!  
 10 mins together = 2x multiplier  
@@ -32,7 +32,7 @@ admin commands:
 
 Requirements:
 - players are not afk
-- players are within 100 blocks of each other
+- players are within 250 blocks of each other
 
 Depends on:
 - essentials

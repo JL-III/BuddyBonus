@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.ChangeNotifyRewardEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,11 +24,11 @@ public class ChangeNotifyReward implements Listener {
 
     @EventHandler
     public void onChangeNotifyRewardEvent(ChangeNotifyRewardEvent event) {
-        plugin.debug("received change notify event!");
+        plugin.debug("received change notify event!", DebugType.INFO);
         UUID player_uuid = event.getPlayer_uuid();
         Player player = Bukkit.getPlayer(player_uuid);
         if (player == null) {
-            plugin.debug("player in change notify event listener is null!");
+            plugin.debug("player in change notify event listener is null!", DebugType.INFO);
         }
         if (plugin.getPlayerNotification().containsKey(player_uuid)) {
             boolean player_setting_inverted = !plugin.getPlayerNotification().get(player_uuid);

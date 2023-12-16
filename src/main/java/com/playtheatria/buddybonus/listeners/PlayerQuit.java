@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.RequestRemoveEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
@@ -27,13 +28,14 @@ public class PlayerQuit implements Listener {
         Optional<Request> optionalRequest = Utils.getOptionalRequestFromRequestList(plugin.getRequestList(), event.getPlayer().getUniqueId());
 
         if (optionalBuddy.isPresent()) {
-            Bukkit.getPluginManager().callEvent(new BuddyRemoveEvent(optionalBuddy.get()));
-            plugin.debug("BuddyBonus: removed buddy containing " + event.getPlayer().getName() + " for logging out.");
+            // player logs out - we load them into the audit list
+            plugin.getBuddyAuditList().put(optionalBuddy.get(), System.currentTimeMillis());
+            plugin.debug("BuddyBonus: sent buddy to audit list for " + event.getPlayer().getName() + " for logging out.", DebugType.ACTION);
         }
 
         if (optionalRequest.isPresent()) {
             Bukkit.getPluginManager().callEvent(new RequestRemoveEvent(optionalRequest.get()));
-            plugin.debug("BuddyBonus: removed request containing " + event.getPlayer().getName() + " for logging out.");
+            plugin.debug("BuddyBonus: removed request containing " + event.getPlayer().getName() + " for logging out.", DebugType.ACTION);
         }
     }
 

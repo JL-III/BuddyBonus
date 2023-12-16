@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.commands;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.BuddyRemoveEvent;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
 import com.playtheatria.buddybonus.events.ChangeNotifyRewardEvent;
@@ -63,7 +64,7 @@ public class PlayerCommands implements CommandExecutor, TabCompleter {
                             + ChatColor.GOLD + " <-> "
                             + ChatColor.GREEN + buddy_two.getName());
                     player.sendMessage(ChatColor.GOLD + " - both active: " + (active ? ChatColor.GREEN : ChatColor.RED) + active);
-                    player.sendMessage(ChatColor.GOLD + " - within 100 blocks: " + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
+                    player.sendMessage(ChatColor.GOLD + " - within 250 blocks: " + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
                 } else {
                     player.sendMessage(ChatColor.GOLD + "You don't have a buddy! Go to discord and find someone to hop online!");
                 }
@@ -74,7 +75,7 @@ public class PlayerCommands implements CommandExecutor, TabCompleter {
                 if (args[0].equalsIgnoreCase("remove")) {
                     Optional<Buddy> buddyOptional = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());
                     if (buddyOptional.isEmpty()) {
-                        plugin.debug("no buddy found for player: " + player.getName());
+                        plugin.debug("no buddy found for player: " + player.getName(), DebugType.INFO);
                         player.sendMessage(ChatColor.GOLD + "You don't have a buddy!");
                     } else {
                         player.sendMessage(ChatColor.GOLD + "Removing buddy!");

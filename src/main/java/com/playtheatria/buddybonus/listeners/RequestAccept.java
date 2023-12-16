@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.BuddyCreateEvent;
 import com.playtheatria.buddybonus.events.RequestAcceptEvent;
 import com.playtheatria.buddybonus.events.RequestRemoveEvent;
@@ -26,9 +27,9 @@ public class RequestAccept implements Listener {
         Optional<Request> optionalRequest = Utils.getOptionalRequestFromRequestList(plugin.getRequestList(), event.getPlayer_uuid());
         if (optionalRequest.isPresent()) {
             Bukkit.getPluginManager().callEvent(new BuddyCreateEvent(optionalRequest.get()));
-            plugin.debug("firing buddy create event");
+            plugin.debug("firing buddy create event", DebugType.ACTION);
             Bukkit.getPluginManager().callEvent(new RequestRemoveEvent(optionalRequest.get()));
-            plugin.debug("removing request since it was accepted");
+            plugin.debug("removing request since it was accepted", DebugType.ACTION);
         } else {
             Player player = Bukkit.getPlayer(event.getPlayer_uuid());
             if (player != null) {

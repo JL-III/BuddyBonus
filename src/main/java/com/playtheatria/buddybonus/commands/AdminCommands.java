@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.commands;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.listeners.RewardCheck;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Request;
@@ -47,7 +48,7 @@ public class AdminCommands implements CommandExecutor {
                     boolean within_range = RewardCheck.playersAreWithinDistance(plugin, player_one.getUniqueId(), player_two.getUniqueId());
                     commandSender.sendMessage(ChatColor.GOLD + "-" + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + " <-> " + ChatColor.GREEN + player_two.getName());
                     commandSender.sendMessage(ChatColor.GOLD + " - both active: " + (active ? ChatColor.GREEN : ChatColor.RED) + active);
-                    commandSender.sendMessage(ChatColor.GOLD + " - within 100 blocks: " + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
+                    commandSender.sendMessage(ChatColor.GOLD + " - within 250 blocks: " + (within_range ? ChatColor.GREEN : ChatColor.RED) + within_range);
                 }
                 return true;
             }
@@ -61,7 +62,7 @@ public class AdminCommands implements CommandExecutor {
             if (!args[0].equalsIgnoreCase("disband")) return false;
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null) {
-                plugin.debug("player was null in disband command.");
+                plugin.debug("player was null in disband command.", DebugType.INFO);
                 return true;
             }
             Optional<Buddy> optionalBuddy = Utils.getOptionalBuddyFromBuddyList(plugin.getBuddyList(), player.getUniqueId());

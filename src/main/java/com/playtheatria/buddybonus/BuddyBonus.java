@@ -4,10 +4,14 @@ import com.earth2me.essentials.Essentials;
 import com.playtheatria.buddybonus.commands.AdminCommands;
 import com.playtheatria.buddybonus.commands.PlayerCommands;
 import com.playtheatria.buddybonus.config.ConfigManager;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.listeners.*;
 import com.playtheatria.buddybonus.objects.*;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +30,8 @@ public final class BuddyBonus extends JavaPlugin {
     private final List<Request> requestList = new CopyOnWriteArrayList<>();
 
     private final ConcurrentHashMap<UUID, Boolean> playerNotification = new ConcurrentHashMap<>();
+
+    private final ConcurrentHashMap<Buddy, Long> buddyAuditList = new ConcurrentHashMap<>();
 
     private final Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
 
@@ -47,6 +53,7 @@ public final class BuddyBonus extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BuddyCreate(this), this);
         Bukkit.getPluginManager().registerEvents(new BuddyRemove(this), this);
         Bukkit.getPluginManager().registerEvents(new BuddyRequest(this), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoin(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuit(this), this);
         Bukkit.getPluginManager().registerEvents(new RequestAccept(this), this);
         Bukkit.getPluginManager().registerEvents(new RequestRemove(this), this);
@@ -58,7 +65,8 @@ public final class BuddyBonus extends JavaPlugin {
         Objects.requireNonNull(getCommand("abuddy")).setExecutor(new AdminCommands(this));
 
         new BuddyClock(this, buddyList).run();
-        new RequestLifeCycleClock(this, requestList).run();
+        new RequestLifecycleClock(this, requestList).run();
+        new BuddyLifecycleClock(this, buddyAuditList).run();
     }
 
     public List<Buddy> getBuddyList() {
@@ -83,9 +91,15 @@ public final class BuddyBonus extends JavaPlugin {
         return configManager;
     }
 
-    public void debug(String message) {
+    public void debug(String message, DebugType type) {
+        ChatColor color = ChatColor.WHITE;
+        switch (type) {
+            case INFO -> color = ChatColor.GOLD;
+            case ACTION -> color = ChatColor.GREEN;
+        }
+
         if (configManager.getDebug()) {
-            Bukkit.getConsoleSender().sendMessage("[DEBUG] BuddyBonus: " + message);
+            Bukkit.getConsoleSender().sendMessage(color + "[DEBUG] BuddyBonus: " + message);
         }
     }
 
@@ -106,5 +120,7 @@ public final class BuddyBonus extends JavaPlugin {
     }
 
     public Essentials getEssentials() { return essentials; }
+
+    public ConcurrentHashMap<Buddy, Long> getBuddyAuditList() { return buddyAuditList; }
 
 }

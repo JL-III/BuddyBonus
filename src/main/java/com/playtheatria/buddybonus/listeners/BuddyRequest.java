@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.BuddyRequestEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import com.playtheatria.buddybonus.objects.Request;
@@ -61,7 +62,7 @@ public class BuddyRequest implements Listener {
                     ChatColor.GREEN + initiate.getName() + ChatColor.GOLD + " has sent you a buddy request! Use "
                     + ChatColor.GREEN + "/buddy accept" + ChatColor.GOLD + " within " + ChatColor.GOLD + plugin.getConfigManager().getRequestLifespan()
                             + ChatColor.GOLD + " seconds to accept!");
-            plugin.debug("created a new request for " + initiate.getName() + " and " + target.getName());
+            plugin.debug("created a new request for " + initiate.getName() + " and " + target.getName(), DebugType.ACTION);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.playtheatria.buddybonus.listeners;
 
 import com.playtheatria.buddybonus.BuddyBonus;
+import com.playtheatria.buddybonus.enums.DebugType;
 import com.playtheatria.buddybonus.events.BuddyCreateEvent;
 import com.playtheatria.buddybonus.objects.Buddy;
 import org.bukkit.Bukkit;
@@ -28,7 +29,7 @@ public class BuddyCreate implements Listener {
             player_two.sendMessage(ChatColor.GREEN + "Buddy request accepted! " + ChatColor.GOLD + "You are now buddies with " + ChatColor.GREEN + player_one.getName() + ChatColor.GOLD + "!");
             plugin.getBuddyList().add(buddy);
         } else {
-            plugin.debug("Something went wrong with buddy creation, let your loving owner know.");
+            plugin.debug("Something went wrong with buddy creation, let your loving owner know.", DebugType.INFO);
         }
     }
 }
